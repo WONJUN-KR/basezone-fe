@@ -5,7 +5,7 @@ import { APP_NAME } from "@/lib/app";
 
 // 원문은 src/content/legal/*.md (디자인 레포 '약관 · 정책' 판과 같은 문구)
 // 앱 이름은 {{APP_NAME}} 자리에 환경 변수로 채움(없으면 다른 빈칸처럼 "[앱 이름]")
-// 빌드할 때 읽어서 정적 페이지로 만듦 → 앱 · 웹 · 스토어 제출용 주소 모두 같은 문서
+// 빌드할 때 읽어서 정적 페이지로 만듦 -> 앱 · 웹 · 스토어 제출용 주소 모두 같은 문서
 export const LEGAL_DOCS = [
   { slug: "terms", title: "서비스 이용약관" },
   { slug: "privacy", title: "개인정보 처리방침" },
