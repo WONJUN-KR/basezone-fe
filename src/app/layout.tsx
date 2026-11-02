@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${notoSansKr.variable} font-sans antialiased`}>
-        {children}
+        <div className="app-frame">{children}</div>
       </body>
     </html>
   );

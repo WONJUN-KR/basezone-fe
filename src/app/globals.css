@@ -5,3 +5,12 @@ body {
   background: var(--color-bg-canvas);
   color: var(--color-text-primary);
 }
+
+/* 앱 화면 틀: 폰 · PC 모두 화면 전체를 씀
+ * 웹용 · 앱용 배치는 화면마다 md(768px) 기준으로 바꿈: 768px 미만 = 앱 배치, 이상 = PC 웹 배치
+ * 글이 긴 페이지(약관)는 PC에서 가운데 720px 로 폭을 줄임 */
+.app-frame {
+  min-height: 100dvh;
+  overscroll-behavior: none;
+  touch-action: manipulation;
+}
