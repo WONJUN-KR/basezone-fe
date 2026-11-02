@@ -1,0 +1,93 @@
+/*
+ * 디자인 토큰 - 피그마 'D 개발 전달 사항' 판(11/2)의 변수 값과 같음.
+ * 피그마에서 값이 바뀌면 여기도 같이 바꿈. 화면에서는 원색 대신 이 이름만 씀.
+ */
+@theme {
+  --color-bg-canvas: #F6F1EA;
+  --color-bg-surface: #FCFAF6;
+  --color-bg-subtle: #EEE7DC;
+  --color-bg-muted: #DED4C6;
+  --color-bg-inverse: #241C17;
+  --color-text-primary: #241C17;
+  --color-text-secondary: #6F6155;
+  --color-text-tertiary: #A39686;
+  --color-text-inverse: #FFFFFF;
+  --color-text-brand: #8E3B2C;
+  --color-text-safe: #1B3124;
+  --color-border-default: #CBBDAA;
+  --color-border-subtle: #DED4C6;
+  --color-border-strong: #241C17;
+  --color-border-focus: #8E3B2C;
+  --color-border-error: #8E3B2C;
+  --color-action-primary: #8E3B2C;
+  --color-action-primary-pressed: #6F2D21;
+  --color-action-disabled: #DED4C6;
+  --color-action-secondary-pressed: #EEE7DC;
+  --color-action-selected: #D3C1A6;
+  --color-action-selected-pressed: #B09A7A;
+  --color-status-safe: #24402F;
+  --color-status-safe-subtle: #E4EAE3;
+  --color-status-review: #A9822F;
+  --color-status-review-subtle: #F3EBDA;
+  --color-status-out: #8E3B2C;
+  --color-status-out-subtle: #F3E5DE;
+  --color-stitch: #8E3B2C;
+  --color-icon-primary: #241C17;
+  --color-icon-secondary: #6F6155;
+  --color-icon-inverse: #FFFFFF;
+  --color-brand-kakao: #FEE500;
+  --color-brand-kakao-label: #191600;
+  --color-brand-apple: #000000;
+  --color-map-land: #F2F0EB;
+  --color-map-block: #E6E3DD;
+  --color-map-park: #CFE6BE;
+  --color-map-road: #FFFFFF;
+  --color-map-water: #A9D1EE;
+  --color-map-field: #9CCB7E;
+  --color-map-dirt: #D9A77E;
+  --color-map-radius: #5B8FD6;
+  --color-overlay-scrim: #241C17;
+  --color-map-road-major: #FDE7A6;
+  --color-map-road-edge: #DAD5CB;
+  --color-map-label: #7C7870;
+  --color-map-label-park: #4F7F45;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-2xl: 28px;
+  --radius-full: 999px;
+
+  --font-sans: var(--font-noto-sans-kr), system-ui, sans-serif;
+}
+
+/* 간격은 Tailwind 기본 간격(p-4 = 1rem)과 겹치지 않게 변수로만 둠: padding: var(--space-16) */
+:root {
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+}
+
+/* 글자 스타일 13개 (피그마 이름 → 클래스: Title/26 Black → type-title-26) */
+@utility type-display-32 { font-size: 32px; line-height: 125%; font-weight: 900; }
+@utility type-title-26 { font-size: 26px; line-height: 130%; font-weight: 900; }
+@utility type-title-22 { font-size: 22px; line-height: 135%; font-weight: 700; }
+@utility type-heading-18 { font-size: 18px; line-height: 140%; font-weight: 700; }
+@utility type-heading-16 { font-size: 16px; line-height: 140%; font-weight: 700; }
+@utility type-body-16 { font-size: 16px; line-height: 150%; font-weight: 500; }
+@utility type-body-15 { font-size: 15px; line-height: 155%; font-weight: 400; }
+@utility type-label-17 { font-size: 17px; line-height: 120%; font-weight: 700; }
+@utility type-label-15 { font-size: 15px; line-height: 120%; font-weight: 700; }
+@utility type-label-13 { font-size: 13px; line-height: 120%; font-weight: 700; }
+@utility type-caption-13 { font-size: 13px; line-height: 145%; font-weight: 400; }
+@utility type-caption-11 { font-size: 11px; line-height: 130%; font-weight: 500; }
+@utility type-number-24 { font-size: 24px; line-height: 110%; font-weight: 900; }
