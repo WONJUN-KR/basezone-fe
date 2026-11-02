@@ -14,3 +14,24 @@ body {
   overscroll-behavior: none;
   touch-action: manipulation;
 }
+
+/* 실밥 점선: 테두리 안쪽에 점선 틀 (피그마 'Stitch'). --stitch-inset · --stitch-color 로 위치 · 색 조절 */
+.stitch {
+  position: relative;
+}
+.stitch::after {
+  content: "";
+  position: absolute;
+  inset: var(--stitch-inset, 4px);
+  border: 1.2px dashed var(--stitch-color, rgb(36 28 23 / 0.25));
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* 가로로 넘기는 줄(필터 칩)에서 스크롤바 숨김 */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
