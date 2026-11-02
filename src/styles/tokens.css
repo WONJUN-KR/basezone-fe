@@ -60,6 +60,10 @@
   --radius-full: 999px;
 
   --font-sans: var(--font-noto-sans-kr), system-ui, sans-serif;
+
+  /* 그림자: 피그마 효과 스타일 Shadow/Card · Shadow/Floating 을 눈으로 맞춘 값 */
+  --shadow-card: 0 2px 8px rgb(36 28 23 / 0.1);
+  --shadow-floating: 0 8px 24px rgb(36 28 23 / 0.16);
 }
 
 /* 간격은 Tailwind 기본 간격(p-4 = 1rem)과 겹치지 않게 변수로만 둠: padding: var(--space-16) */
