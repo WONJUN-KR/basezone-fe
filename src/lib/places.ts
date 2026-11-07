@@ -9,13 +9,12 @@ export const VERDICT_LABEL: Record<Verdict, string> = {
   out: "불가",
 };
 
-// 혼잡도 1~4 = 사람 아이콘 4칸 중 채우는 수. 피그마 Crowd 부품과 같은 말
-export type CrowdLevel = 1 | 2 | 3 | 4;
+// 혼잡도 1~3 = 사람 아이콘 3칸 중 채우는 수. 피그마 Crowd 부품 · 백엔드 CrowdCalculator 와 같은 3단계
+export type CrowdLevel = 1 | 2 | 3;
 export const CROWD_LABEL: Record<CrowdLevel, string> = {
   1: "여유",
   2: "보통",
-  3: "조금 혼잡",
-  4: "혼잡",
+  3: "혼잡",
 };
 
 export type CatchballPlace = {

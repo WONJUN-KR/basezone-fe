@@ -1,11 +1,11 @@
 import { CROWD_LABEL, type CrowdLevel } from "@/lib/places";
 
-// 피그마 Crowd/관중: 사람 4칸 중 level 만큼 진하게 + 말
+// 피그마 Crowd 부품: 사람 3칸 중 level 만큼 진하게 + 말
 export default function Crowd({ level }: { level: CrowdLevel }) {
   return (
     <span className="flex items-center gap-[var(--space-8)]">
       <span aria-hidden className="flex gap-[2px]">
-        {[1, 2, 3, 4].map((i) => (
+        {[1, 2, 3].map((i) => (
           <svg
             key={i}
             width="12"
