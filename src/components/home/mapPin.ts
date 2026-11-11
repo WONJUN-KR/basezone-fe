@@ -22,14 +22,29 @@ function glyph(place: Place): string {
   );
 }
 
+const W = 34;
+const H = 44;
+
+// 선택 상태만 바꿈 (요소를 새로 만들면 키보드 포커스가 사라지므로 크기만 고침)
+export function setPinSelected(el: HTMLElement, selected: boolean) {
+  const scale = selected ? 1.3 : 1;
+  const w = `${W * scale}px`;
+  const h = `${H * scale}px`;
+  el.style.width = w;
+  el.style.height = h;
+  el.setAttribute("aria-pressed", String(selected));
+  const svg = el.querySelector("svg");
+  if (svg) {
+    svg.setAttribute("width", w);
+    svg.setAttribute("height", h);
+  }
+}
+
 export function createPinElement(
   place: Place,
   selected: boolean,
   onClick: () => void,
 ): HTMLElement {
-  const scale = selected ? 1.3 : 1;
-  const w = 34 * scale;
-  const h = 44 * scale;
   const fill =
     place.kind === "batting" ? "var(--color-bg-inverse)" : FILL[place.verdict];
   const head =
@@ -45,8 +60,8 @@ export function createPinElement(
       ? `${place.name}, 배팅장`
       : `${place.name}, ${VERDICT_LABEL[place.verdict]}`,
   );
-  el.style.cssText = `display:block;width:${w}px;height:${h}px;padding:0;border:0;background:none;cursor:pointer;filter:drop-shadow(0 2px 3px rgb(36 28 23 / 0.3));`;
-  el.innerHTML = `<svg width="${w}" height="${h}" viewBox="0 0 34 44">
+  el.style.cssText = `display:block;padding:0;border:0;background:none;cursor:pointer;filter:drop-shadow(0 2px 3px rgb(36 28 23 / 0.3));`;
+  el.innerHTML = `<svg viewBox="0 0 34 44">
     ${head} fill="${fill}" stroke="#fff" stroke-width="2"/>
     ${place.kind === "catchball" ? '<circle cx="17" cy="17" r="10.5" fill="none" stroke="rgb(246 240 230 / 0.6)" stroke-width="0.9" stroke-dasharray="1.6 1.4"/>' : ""}
     <g transform="translate(9 ${place.kind === "batting" ? 7.5 : 9}) scale(0.6667)" style="color:#fff">${glyph(place)}</g>
@@ -55,5 +70,6 @@ export function createPinElement(
     e.stopPropagation();
     onClick();
   });
+  setPinSelected(el, selected);
   return el;
 }

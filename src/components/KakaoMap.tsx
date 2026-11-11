@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { createPinElement } from "@/components/home/mapPin";
+import { createPinElement, setPinSelected } from "@/components/home/mapPin";
 import { loadKakaoMaps } from "@/lib/kakao";
 import type { Place } from "@/lib/places";
 
@@ -24,7 +24,10 @@ export default function KakaoMap({
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const mapRef = useRef<any>(null); // eslint-disable-line @typescript-eslint/no-explicit-any
-  const overlaysRef = useRef<any[]>([]); // eslint-disable-line @typescript-eslint/no-explicit-any
+  const overlaysRef = useRef<
+    { id: string; overlay: any; el: HTMLElement }[] // eslint-disable-line @typescript-eslint/no-explicit-any
+  >([]);
+  const selectedIdRef = useRef(selectedId);
   const onSelectRef = useRef(onSelect);
   const [ready, setReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -54,23 +57,36 @@ export default function KakaoMap({
     };
   }, []);
 
-  // 핀 다시 그리기 (장소 · 선택이 바뀔 때). 선택한 핀은 크게, 맨 위로
+  // 핀 다시 그리기는 장소가 바뀔 때만
   useEffect(() => {
     if (!ready) return;
     const kakao = window.kakao;
-    overlaysRef.current.forEach((o) => o.setMap(null));
+    overlaysRef.current.forEach(({ overlay }) => overlay.setMap(null));
     overlaysRef.current = places.map((p) => {
-      const selected = p.id === selectedId;
-      return new kakao.maps.CustomOverlay({
+      const el = createPinElement(p, p.id === selectedIdRef.current, () =>
+        onSelectRef.current(p.id),
+      );
+      const overlay = new kakao.maps.CustomOverlay({
         map: mapRef.current,
         position: new kakao.maps.LatLng(p.lat, p.lng),
-        content: createPinElement(p, selected, () => onSelectRef.current(p.id)),
+        content: el,
         yAnchor: 1,
-        zIndex: selected ? 10 : 1,
+        zIndex: p.id === selectedIdRef.current ? 10 : 1,
         clickable: true,
       });
+      return { id: p.id, overlay, el };
     });
-  }, [ready, places, selectedId]);
+  }, [ready, places]);
+
+  // 선택이 바뀌면 있는 핀의 크기 · 순서만 바꿈 (다시 만들지 않아 키보드 포커스 유지). 선택한 핀은 크게, 맨 위로
+  useEffect(() => {
+    selectedIdRef.current = selectedId;
+    overlaysRef.current.forEach(({ id, overlay, el }) => {
+      const selected = id === selectedId;
+      setPinSelected(el, selected);
+      overlay.setZIndex(selected ? 10 : 1);
+    });
+  }, [selectedId]);
 
   useEffect(() => {
     if (!ready || !center) return;

@@ -12,15 +12,18 @@ import KakaoMap, { DEFAULT_CENTER } from "@/components/KakaoMap";
 import { MOCK_PLACES, type Place, distanceMeters } from "@/lib/places";
 
 // 필터: 캐치볼 · 배팅장은 종류(둘 다 끄면 둘 다 보임), 왼손 타석 · 지금 여유는 조건
-// 왼손 타석은 배팅장에만 있는 조건이라 켜면 종류와 상관없이 왼손 타석 있는 배팅장만
+// 조건은 종류마다 하나씩: 왼손 타석 = 배팅장, 지금 여유 = 캐치볼(혼잡도는 캐치볼만 있음)
+// 조건을 켜면 종류 칩과 상관없이 그 조건을 만족하는 장소만, 둘 다 켜면 각 조건에 맞는 장소를 함께
 function applyFilters(places: Place[], f: Set<FilterKey>): Place[] {
+  const lefty = f.has("lefty");
+  const quiet = f.has("quiet");
   const kindOn = f.has("catchball") || f.has("batting");
   return places.filter((p) => {
-    if (f.has("lefty")) return p.kind === "batting" && (p.leftyBoxes ?? 0) > 0;
-    if (kindOn && !f.has(p.kind)) return false;
-    if (f.has("quiet") && !(p.kind === "catchball" && p.crowd <= 2))
-      return false;
-    return true;
+    if (lefty || quiet) {
+      if (p.kind === "batting") return lefty && (p.leftyBoxes ?? 0) > 0;
+      return quiet && p.crowd <= 2;
+    }
+    return !kindOn || f.has(p.kind);
   });
 }
 
